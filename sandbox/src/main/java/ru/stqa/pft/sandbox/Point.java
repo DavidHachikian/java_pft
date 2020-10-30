@@ -8,10 +8,10 @@ public class Point{
     Point p1 = new Point();
     Point p2 = new Point();
 
-    p1.x1 = -4;
-    p1.y1 = 10;
-    p2.x2 = 0;
-    p2.y2 = 13;
+    p1.x1 = 5;
+    p1.y1 = 20;
+    p2.x2 = 8;
+    p2.y2 = 15;
 
     System.out.println("Расстояние между точками (" + p1.Coord1() + ") и (" + p2.Coord2() + ") = " + distance(p1,p2));
 //Вывод текста и результата вычисления расстояния
