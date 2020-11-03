@@ -12,7 +12,7 @@ public class MyFirstProgram {
 
 
 
-    /*hello("world");
+    hello("world");
     hello("user");
     hello("David");
 
@@ -27,7 +27,6 @@ public class MyFirstProgram {
   public static void hello (String somebody) {
     System.out.println("Hello, " + somebody + "!");
 
-  }*/
-
   }
+
 }
