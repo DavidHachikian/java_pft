@@ -30,20 +30,44 @@ public class GroupCreationTests {
   public void testGroupCreation() {
     wd.get("http://localhost/addressbook/");
     wd.manage().window().setSize(new Dimension(896, 868));
-    wd.findElement(By.name("user")).sendKeys("admin");
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).sendKeys("secret");
-    wd.findElement(By.cssSelector("input:nth-child(7)")).click();
-    wd.findElement(By.linkText("groups")).click();
-    wd.findElement(By.name("new")).click();
-    wd.findElement(By.name("group_name")).click();
-    wd.findElement(By.name("group_name")).sendKeys("test1");
-    wd.findElement(By.name("group_header")).click();
-    wd.findElement(By.name("group_header")).sendKeys("test2");
-    wd.findElement(By.name("group_footer")).click();
-    wd.findElement(By.name("group_footer")).sendKeys("test3");
-    wd.findElement(By.name("submit")).click();
+    login("admin", "secret");
+    goToGroupPage("groups");
+    initGroupCreation("new");
+    fillGroupForm(new GroupData("test1", "test2", "test3"));
+    submitGroupCreation("submit");
+    returnToGroupPage();
+  }
+
+  private void returnToGroupPage() {
     wd.findElement(By.linkText("group page")).click();
     wd.findElement(By.linkText("Logout")).click();
+  }
+
+  private void submitGroupCreation(String submit) {
+    wd.findElement(By.name(submit)).click();
+  }
+
+  private void fillGroupForm(GroupData groupData) {
+    wd.findElement(By.name("group_name")).click();
+    wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
+    wd.findElement(By.name("group_header")).click();
+    wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
+    wd.findElement(By.name("group_footer")).click();
+    wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
+  }
+
+  private void initGroupCreation(String s) {
+    wd.findElement(By.name(s)).click();
+  }
+
+  private void goToGroupPage(String groups) {
+    wd.findElement(By.linkText(groups)).click();
+  }
+
+  private void login(String username, String password) {
+    wd.findElement(By.name("user")).sendKeys(username);
+    wd.findElement(By.name("pass")).click();
+    wd.findElement(By.name("pass")).sendKeys(password);
+    wd.findElement(By.cssSelector("input:nth-child(7)")).click();
   }
 }
