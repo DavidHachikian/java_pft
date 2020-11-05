@@ -17,33 +17,57 @@ import java.util.*;
 
 
 public class ProfileCreationTests {
-  private WebDriver driver;
+  private WebDriver wd;
   private Map<String, Object> vars;
   JavascriptExecutor js;
   @Before
   public void setUp() {
-    driver = new FirefoxDriver();
-    js = (JavascriptExecutor) driver;
+    wd = new FirefoxDriver();
+    js = (JavascriptExecutor) wd;
     vars = new HashMap<String, Object>();
   }
   @After
   public void tearDown() {
-    driver.quit();
+    wd.quit();
   }
   @Test
   public void profileCreationTests() {
-    driver.get("http://localhost/addressbook/");
-    driver.manage().window().setSize(new Dimension(896, 868));
-    driver.findElement(By.name("user")).sendKeys("admin");
-    driver.findElement(By.name("pass")).click();
-    driver.findElement(By.name("pass")).sendKeys("secret");
-    driver.findElement(By.cssSelector("input:nth-child(7)")).click();
-    driver.findElement(By.linkText("add new")).click();
-    driver.findElement(By.name("firstname")).sendKeys("David");
-    driver.findElement(By.name("lastname")).sendKeys("Test");
-    driver.findElement(By.name("home")).sendKeys("22222222");
-    driver.findElement(By.name("email")).sendKeys("test@gmail.com");
-    driver.findElement(By.cssSelector("input:nth-child(87)")).click();
-    driver.findElement(By.linkText("Logout")).click();
+    startTest();
+    login();
+    goToNewProfile("add new");
+    fillProfileCreation();
+    submitProfileCreation("input:nth-child(87)");
+    logout("Logout");
+  }
+
+  private void logout(String logout) {
+    wd.findElement(By.linkText(logout)).click();
+  }
+
+  private void submitProfileCreation(String s) {
+    wd.findElement(By.cssSelector(s)).click();
+  }
+
+  private void fillProfileCreation() {
+    wd.findElement(By.name("firstname")).sendKeys("David");
+    wd.findElement(By.name("lastname")).sendKeys("Test");
+    wd.findElement(By.name("home")).sendKeys("22222222");
+    wd.findElement(By.name("email")).sendKeys("test@gmail.com");
+  }
+
+  private void goToNewProfile(String s) {
+    wd.findElement(By.linkText(s)).click();
+  }
+
+  private void login() {
+    wd.findElement(By.name("user")).sendKeys("admin");
+    wd.findElement(By.name("pass")).click();
+    wd.findElement(By.name("pass")).sendKeys("secret");
+    wd.findElement(By.cssSelector("input:nth-child(7)")).click();
+  }
+
+  private void startTest() {
+    wd.get("http://localhost/addressbook/");
+    wd.manage().window().setSize(new Dimension(896, 868));
   }
 }
