@@ -28,14 +28,18 @@ public class GroupCreationTests {
   }
   @Test
   public void testGroupCreation() {
-    wd.get("http://localhost/addressbook/");
-    wd.manage().window().setSize(new Dimension(896, 868));
+    startTest();
     login("admin", "secret");
     goToGroupPage("groups");
     initGroupCreation("new");
     fillGroupForm(new GroupData("test1", "test2", "test3"));
     submitGroupCreation("submit");
     returnToGroupPage();
+  }
+
+  private void startTest() {
+    wd.get("http://localhost/addressbook/");
+    wd.manage().window().setSize(new Dimension(896, 868));
   }
 
   private void returnToGroupPage() {
