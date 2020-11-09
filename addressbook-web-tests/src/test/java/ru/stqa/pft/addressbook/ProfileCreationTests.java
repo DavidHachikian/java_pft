@@ -33,9 +33,9 @@ public class ProfileCreationTests {
   @Test
   public void profileCreationTests() {
     startTest();
-    login();
+    login("admin", "secret");
     goToNewProfile("add new");
-    fillProfileCreation();
+    fillProfileCreation(new ProfileData("David", "Test", "22222222", "test@gmail.com"));
     submitProfileCreation("input:nth-child(87)");
     logout("Logout");
   }
@@ -48,21 +48,21 @@ public class ProfileCreationTests {
     wd.findElement(By.cssSelector(s)).click();
   }
 
-  private void fillProfileCreation() {
-    wd.findElement(By.name("firstname")).sendKeys("David");
-    wd.findElement(By.name("lastname")).sendKeys("Test");
-    wd.findElement(By.name("home")).sendKeys("22222222");
-    wd.findElement(By.name("email")).sendKeys("test@gmail.com");
+  private void fillProfileCreation(ProfileData profileData) {
+    wd.findElement(By.name("firstname")).sendKeys(profileData.getFirstname());
+    wd.findElement(By.name("lastname")).sendKeys(profileData.getLastname());
+    wd.findElement(By.name("home")).sendKeys(profileData.getHomephone());
+    wd.findElement(By.name("email")).sendKeys(profileData.getEmail());
   }
 
   private void goToNewProfile(String s) {
     wd.findElement(By.linkText(s)).click();
   }
 
-  private void login() {
-    wd.findElement(By.name("user")).sendKeys("admin");
+  private void login(String username, String password) {
+    wd.findElement(By.name("user")).sendKeys(username);
     wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).sendKeys("secret");
+    wd.findElement(By.name("pass")).sendKeys(password);
     wd.findElement(By.cssSelector("input:nth-child(7)")).click();
   }
 
