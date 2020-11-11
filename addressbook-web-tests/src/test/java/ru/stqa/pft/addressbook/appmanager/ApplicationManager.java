@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +11,9 @@ import java.util.Map;
 public class ApplicationManager {
   public WebDriver wd;
 
-  private SessionHelper sessionHelper;
-  private NavigationHelper navigationHelper;
-  private GroupHelper groupHelper;
+  public SessionHelper sessionHelper;
+  public NavigationHelper navigationHelper;
+  public GroupHelper groupHelper;
   JavascriptExecutor js;
   private Map<String, Object> vars;
 
