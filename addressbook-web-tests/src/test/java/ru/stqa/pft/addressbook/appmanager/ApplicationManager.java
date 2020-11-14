@@ -9,8 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ApplicationManager {
+
   public WebDriver wd;
 
+  public ContactHelper contactHelper;
   public SessionHelper sessionHelper;
   public NavigationHelper navigationHelper;
   public GroupHelper groupHelper;
@@ -27,16 +29,15 @@ public class ApplicationManager {
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
     sessionHelper.login("admin", "secret");
-    js = (JavascriptExecutor) wd;
+    contactHelper = new ContactHelper(wd);
+
+    js = (JavascriptExecutor) contactHelper.wd;
     vars = new HashMap<String, Object>();
   }
 
   public void stop() {
     wd.quit();
   }
-
-
-
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
@@ -45,4 +46,6 @@ public class ApplicationManager {
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
   }
+
+  public ContactHelper getContactHelper() { return contactHelper; }
 }

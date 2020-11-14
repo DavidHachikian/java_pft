@@ -2,72 +2,16 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import org.openqa.selenium.Dimension;
-
-import org.openqa.selenium.JavascriptExecutor;
-
-import java.util.*;
 
 
-public class ProfileCreationTests {
-  private WebDriver wd;
-  private Map<String, Object> vars;
-  JavascriptExecutor js;
-  @Before
-  public void setUp() {
-    wd = new FirefoxDriver();
-    js = (JavascriptExecutor) wd;
-    vars = new HashMap<String, Object>();
-  }
-  @After
-  public void tearDown() {
-    wd.quit();
-  }
+public class ProfileCreationTests extends TestBase {
+
   @Test
   public void profileCreationTests() {
-    startTest();
-    login();
-    goToNewProfile("add new");
-    fillProfileCreation();
-    submitProfileCreation("input:nth-child(87)");
-    logout("Logout");
+    app.getNavigationHelper().goToNewProfile("add new", ProfileCreationTests.this);
+    app.getContactHelper().fillProfileCreation();
+    app.getContactHelper().submitProfileCreation("input:nth-child(87)");
+    app.getContactHelper().logout("Logout");
   }
 
-  private void logout(String logout) {
-    wd.findElement(By.linkText(logout)).click();
-  }
-
-  private void submitProfileCreation(String s) {
-    wd.findElement(By.cssSelector(s)).click();
-  }
-
-  private void fillProfileCreation() {
-    wd.findElement(By.name("firstname")).sendKeys("David");
-    wd.findElement(By.name("lastname")).sendKeys("Test");
-    wd.findElement(By.name("home")).sendKeys("22222222");
-    wd.findElement(By.name("email")).sendKeys("test@gmail.com");
-  }
-
-  private void goToNewProfile(String s) {
-    wd.findElement(By.linkText(s)).click();
-  }
-
-  private void login() {
-    wd.findElement(By.name("user")).sendKeys("admin");
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).sendKeys("secret");
-    wd.findElement(By.cssSelector("input:nth-child(7)")).click();
-  }
-
-  private void startTest() {
-    wd.get("http://localhost/addressbook/");
-    wd.manage().window().setSize(new Dimension(896, 868));
-  }
 }
