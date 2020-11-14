@@ -19,4 +19,6 @@ public class NavigationHelper extends HelperBase {
   public void goToNewProfile(String s, TestBase testBase) {
     click(By.linkText(s));
   }
+
+
 }

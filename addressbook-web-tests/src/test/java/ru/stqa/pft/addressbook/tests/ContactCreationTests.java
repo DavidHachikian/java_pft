@@ -4,11 +4,11 @@ package ru.stqa.pft.addressbook.tests;
 import org.junit.Test;
 
 
-public class ProfileCreationTests extends TestBase {
+public class ContactCreationTests extends TestBase {
 
   @Test
   public void profileCreationTests() {
-    app.getNavigationHelper().goToNewProfile("add new", ProfileCreationTests.this);
+    app.getNavigationHelper().goToNewProfile("add new", ContactCreationTests.this);
     app.getContactHelper().fillProfileCreation();
     app.getContactHelper().submitProfileCreation("input:nth-child(87)");
     app.getContactHelper().logout("Logout");

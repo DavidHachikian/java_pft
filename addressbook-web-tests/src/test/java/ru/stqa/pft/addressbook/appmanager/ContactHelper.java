@@ -6,7 +6,6 @@ import ru.stqa.pft.addressbook.tests.TestBase;
 
 public class ContactHelper extends HelperBase {
 
-  public WebDriver wd;
 
   public ContactHelper(WebDriver wd) {
     super(wd);
@@ -47,4 +46,13 @@ public class ContactHelper extends HelperBase {
   public void submitContactDeletion() {
     wd.switchTo().alert().accept();
   }
+
+
+  /*public void initContactModification() {
+    click(By.xpath("//img[@alt='Edit']"));
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }*/
 }
