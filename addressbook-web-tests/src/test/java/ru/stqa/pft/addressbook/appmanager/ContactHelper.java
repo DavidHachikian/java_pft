@@ -4,12 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
-public class ContactHelper {
+public class ContactHelper extends HelperBase {
 
   public WebDriver wd;
 
   public ContactHelper(WebDriver wd) {
-    this.wd = wd;
+    super(wd);
   }
 
   public void stop() {
@@ -36,4 +36,15 @@ public class ContactHelper {
   }
 
 
+  public void selectContactDeletion() {
+    click(By.xpath("//td/input"));
+  }
+
+  public void initContactDeletion() {
+    click(By.xpath("//input[@value='Delete']"));
+  }
+
+  public void submitContactDeletion() {
+    wd.switchTo().alert().accept();
+  }
 }
