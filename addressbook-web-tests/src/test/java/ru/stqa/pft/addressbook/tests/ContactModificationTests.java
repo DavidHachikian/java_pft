@@ -7,9 +7,9 @@ public class ContactModificationTests extends TestBase {
   @Test
   public void testContactModification() {
 
-    /*app.getContactHelper().initContactModification();
-    app.getContactHelper().fillProfileCreation();
-    app.getContactHelper().submitContactModification();*/
+    app.getContactHelper().initContactModification();
+    app.getContactHelper().fillContactCreation();
+    app.getContactHelper().submitContactModification();
 
   }
 }
