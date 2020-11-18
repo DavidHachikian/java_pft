@@ -2,7 +2,7 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ru.stqa.pft.addressbook.tests.TestBase;
+
 
 public class ContactHelper extends HelperBase {
 
@@ -15,15 +15,15 @@ public class ContactHelper extends HelperBase {
     wd.quit();
   }
 
-  public void logout(String logout) {
-    wd.findElement(By.linkText(logout)).click();
+  public void logout() {
+    click(By.linkText("Logout"));
   }
 
-  public void submitProfileCreation(String s) {
-    wd.findElement(By.cssSelector(s)).click();
+  public void submitContactCreation() {
+    click(By.cssSelector("input:nth-child(87)"));
   }
 
-  public void fillProfileCreation() {
+  public void fillContactCreation() {
     type("firstname", "David");
     type("lastname", "Test");
     type("home", "22222222");
@@ -33,7 +33,6 @@ public class ContactHelper extends HelperBase {
   private void type(String firstname, String david) {
     wd.findElement(By.name(firstname)).sendKeys(david);
   }
-
 
   public void selectContactDeletion() {
     click(By.xpath("//td/input"));

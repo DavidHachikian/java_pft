@@ -16,8 +16,8 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("groups"));
   }
 
-  public void goToNewProfile(String s, TestBase testBase) {
-    click(By.linkText(s));
+  public void goToNewProfile() {
+    click(By.linkText("add new"));
   }
 
 

@@ -8,10 +8,10 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void profileCreationTests() {
-    app.getNavigationHelper().goToNewProfile("add new", ContactCreationTests.this);
-    app.getContactHelper().fillProfileCreation();
-    app.getContactHelper().submitProfileCreation("input:nth-child(87)");
-    app.getContactHelper().logout("Logout");
+    app.getNavigationHelper().goToNewProfile();
+    app.getContactHelper().fillContactCreation();
+    app.getContactHelper().submitContactCreation();
+    app.getContactHelper().logout();
   }
 
 }
