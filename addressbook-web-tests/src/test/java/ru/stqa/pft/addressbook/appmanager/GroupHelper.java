@@ -26,8 +26,8 @@ public class GroupHelper extends HelperBase {
     type(By.name("group_footer"), groupData.getFooter());
   }
 
-  public void initGroupCreation(String s) {
-    click(By.name(s));
+  public void initGroupCreation() {
+    click(By.name("new"));
   }
 
   public void deleteSelectedGroups() {
