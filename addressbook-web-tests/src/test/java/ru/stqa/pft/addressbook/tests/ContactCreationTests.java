@@ -2,6 +2,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.junit.Test;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 
 public class ContactCreationTests extends TestBase {
@@ -9,7 +10,7 @@ public class ContactCreationTests extends TestBase {
   @Test
   public void profileCreationTests() {
     app.getNavigationHelper().goToNewProfile();
-    app.getContactHelper().fillContactCreation();
+    app.getContactHelper().fillContactCreation(new ContactData("test_name", "test_surname", "test1"), true);
     app.getContactHelper().submitContactCreation();
     app.getContactHelper().logout();
   }
