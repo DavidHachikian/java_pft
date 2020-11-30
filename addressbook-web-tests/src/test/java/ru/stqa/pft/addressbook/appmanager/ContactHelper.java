@@ -53,6 +53,7 @@ public class ContactHelper extends HelperBase {
 
   public void initContactDeletion() {
     click(By.xpath("//input[@value='Delete']"));
+    wd.findElement(By.cssSelector("div.msgbox"));
   }
 
   public void submitContactDeletion() {
