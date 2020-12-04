@@ -11,6 +11,8 @@ import ru.stqa.pft.addressbook.model.ContactData;
 public class ContactHelper extends HelperBase {
 
 
+
+
   public ContactHelper(WebDriver wd) {
     super(wd);
   }
@@ -47,17 +49,25 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.name(firstname)).sendKeys(david);
   }
 
+  public void initContactCreation() {
+    click(By.linkText("add new"));
+  }
+
   public void selectContactDeletion() {
-    click(By.xpath("//td/input"));
+    //wd.findElements(By.name("selected[]"));
+
+    click(By.id("MassCB"));
+
   }
 
   public void initContactDeletion() {
     click(By.xpath("//input[@value='Delete']"));
-    wd.findElement(By.cssSelector("div.msgbox"));
+
   }
 
   public void submitContactDeletion() {
     wd.switchTo().alert().accept();
+    //wd.findElement(By.cssSelector("div.msgbox"));
   }
 
   public void initContactModification() {
@@ -69,10 +79,16 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public void createContact(ContactData contact, boolean b) {
-    fillContactCreation(contact, true);
+  public void createContact(ContactData contact, boolean creation) {
+    initContactCreation();
+    fillContactCreation(contact, creation);
     submitContactCreation();
-    logout();
+    returnToHomePage();
+    //logout();
+  }
+
+  private void returnToHomePage() {
+    click(By.linkText("home"));
   }
 
   public boolean isThereAContact() {
