@@ -11,6 +11,7 @@ import org.openqa.selenium.remote.BrowserType;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
 
@@ -38,9 +39,9 @@ public class ApplicationManager {
       wd = new InternetExplorerDriver();
     }
 
-
+    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
-    wd.manage().window().setSize(new Dimension(896, 868));
+    //wd.manage().window().setSize(new Dimension(896, 868)); размер окна браузера
 
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
