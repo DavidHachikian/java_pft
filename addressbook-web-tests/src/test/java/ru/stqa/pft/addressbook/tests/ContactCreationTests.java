@@ -2,7 +2,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.Ignore;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.Comparator;
@@ -11,9 +11,10 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test
+  @Ignore
+  //@Test
   public void profileCreationTests() {
-    app.getNavigationHelper().goToNewProfile();
+    app.goTo().goToNewProfile();
     List<ContactData> before = app.getContactHelper().getContactList();
     ContactData contact = new ContactData("test_name", "test_surname", "test1");
     app.getContactHelper().createContact(contact);
