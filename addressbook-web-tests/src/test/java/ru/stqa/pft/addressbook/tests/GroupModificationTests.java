@@ -12,7 +12,7 @@ public class GroupModificationTests extends TestBase {
 
   @Before
   public void ensurePreconditions() {
-    app.goTo().groupPage();
+    app.getNavigationHelper().groupPage();
     if (app.group().list().size() == 0) {
       app.group().create(new GroupData().withName("test1"));
     }

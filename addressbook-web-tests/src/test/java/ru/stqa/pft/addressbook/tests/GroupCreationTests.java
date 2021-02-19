@@ -12,7 +12,7 @@ import java.util.List;
 public class GroupCreationTests extends TestBase {
   @Test
   public void testGroupCreation() {
-    app.goTo().groupPage();
+    app.getNavigationHelper().groupPage();
     List<GroupData> before = app.group().list();
     GroupData group = new GroupData().withName("test2");
     app.group().create(group);
