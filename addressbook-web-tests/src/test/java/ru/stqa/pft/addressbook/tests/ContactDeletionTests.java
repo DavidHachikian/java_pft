@@ -7,22 +7,22 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
+
   @Test
   public void testContactDeletion() {
-    if (! app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("test_name", "test_surname", "test1"));
+    if (! app.getContactHelper().isThereAContact()){
+      app.getContactHelper().initContactCreation();
+      app.getContactHelper().createContact(new ContactData("test_name", "test_middlename", "test_lastname", "111", "222", "333", "666-55-77", "test@gmail.com", "xxx"), true);
+      app.getNavigationHelper().returnToHomePage();
     }
     List<ContactData> before = app.getContactHelper().getContactList();
-    //int before = app.getContactHelper().getContactCount(); //контролль количества контактов до
+
     app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().initContactDeletion();
-    app.getContactHelper().submitContactDeletion();
+    app.getContactHelper().deleteSelectedContacts();
     List<ContactData> after = app.getContactHelper().getContactList();
-    //int after = app.getContactHelper().getContactCount(); //контролль количества контактов после
-    Assert.assertEquals(after.size(), before.size() - 1); //количество контактов уменьшилось на 1
+    Assert.assertEquals(after.size(), before.size() - 1);
 
     before.remove(before.size() - 1);
     Assert.assertEquals(before, after);
-
   }
 }

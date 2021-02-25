@@ -11,29 +11,53 @@ import java.util.List;
 public class ContactModificationTests extends TestBase {
 
   @Test
-  public void testContactModification() {
-
-
-    if (! app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("test_name", "test_surname", "test1"));
+  public void testModifyContactSorted() {
+    if (! app.getContactHelper().isThereAContact())
+    {
+      app.getContactHelper().initContactCreation();
+      app.getContactHelper().createContact(new ContactData("test_name", null, "test_lastname", null, null, null, null, null, "xxx"), true);
+      app.getNavigationHelper().returnToHomePage();
     }
     List<ContactData> before = app.getContactHelper().getContactList();
-    //int before = app.getContactHelper().getContactCount(); //контролль количества контактов до
-    app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().initContactModification();
-    ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"test_name2", "test_surname", null);
-    app.getContactHelper().fillContactCreation(contact);
+    app.getContactHelper().initContactModification(before.size() - 1);
+    ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "test_name", null, "test_lastname", null, null, null, null, null, "xxx");
+    app.getContactHelper().fillContactForm(contact);
     app.getContactHelper().submitContactModification();
+    app.getNavigationHelper().returnToHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
-    //int after = app.getContactHelper().getContactCount(); //контролль количества контактов после
-    Assert.assertEquals(after.size(), before.size()); //количество контактов не изменилось
+    Assert.assertEquals(after.size(), before.size());
 
     before.remove(before.size() - 1);
     before.add(contact);
-    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());  //с1 и с2 - контакты, которые сравниваются
+
+    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
     before.sort(byId);
     after.sort(byId);
     Assert.assertEquals(before, after);
+  }
 
+  @Test
+  public void testModifyContact() {
+    if (! app.getContactHelper().isThereAContact())
+    {
+      app.getContactHelper().initContactCreation();
+      app.getContactHelper().createContact(new ContactData("test_name", null, "test_lastname", null, null, null, null, null, "xxx"), true);
+      app.getNavigationHelper().returnToHomePage();
+    }
+    List<ContactData> before = app.getContactHelper().getContactList();
+
+    app.getContactHelper().initContactModification(before.size() - 1);
+    ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "test_name", null, "test_lastname", null, null, null, null, null, "xxx");
+
+    app.getContactHelper().fillContactForm(contact);
+    app.getContactHelper().submitContactModification();
+    app.getNavigationHelper().returnToHomePage();
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size());
+
+    before.remove(before.size() - 1);
+    before.add(contact);
+    // Преобразовываем списки в множества (set)
+    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
 }

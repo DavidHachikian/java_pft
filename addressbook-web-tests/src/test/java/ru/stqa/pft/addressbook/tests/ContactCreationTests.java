@@ -12,21 +12,38 @@ import java.util.List;
 public class ContactCreationTests extends TestBase {
 
   @Test
-  public void profileCreationTests() {
-    //int before = app.getContactHelper().getContactCount(); //контроль количества контактов до
-    app.getNavigationHelper().goToNewProfile();
+  public void testAddContactSorted() {
     List<ContactData> before = app.getContactHelper().getContactList();
-    ContactData contact = new ContactData("test_name", "test_surname", "test1");
-    app.getContactHelper().createContact(contact);
+    app.getContactHelper().initContactCreation();
+
+    ContactData contact = new ContactData("test_name", "test_middlename", "test_lastname", "111", "222", "333", "666-55-77", "test@gmail.com", "xxx");
+    app.getContactHelper().createContact(contact, true);
+    app.getNavigationHelper().returnToHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
-    //int after = app.getContactHelper().getContactCount(); //контроль количества контактов после
-    Assert.assertEquals(after.size(), before.size() + 1); //количество контактов увеличилось на 1
-
-    contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    Assert.assertEquals(after.size(), before.size() + 1);
     before.add(contact);
-    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());  //с1 и с2 - контакты, которые сравниваются
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
+    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
   }
 
+
+  @Test
+  public void testAddContact() {
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.getContactHelper().initContactCreation();
+
+    ContactData contact = new ContactData("test_name", "test_middlename", "test_lastname", "111", "222", "333", "666-55-77", "test@gmail.com", "xxx");
+    app.getContactHelper().createContact(contact, true);
+    app.getNavigationHelper().returnToHomePage();
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size() + 1);
+
+    // Находим max Id, и добавляем в contact
+    contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    before.add(contact);
+    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+  }
 }
