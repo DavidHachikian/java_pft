@@ -2,6 +2,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
