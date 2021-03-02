@@ -1,5 +1,4 @@
 package ru.stqa.pft.addressbook.tests;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runners.Suite;
