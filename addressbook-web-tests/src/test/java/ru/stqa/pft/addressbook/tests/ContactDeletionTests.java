@@ -14,7 +14,7 @@ public class ContactDeletionTests extends TestBase {
     if (app.contact().list().size() == 0)
     {
       app.contact().initContactCreation();
-      app.contact().create(new ContactData("test_name", null, "test_lastname", null, null, null, null, null, "xxx"), true);
+      app.contact().create(new ContactData().withFirstname("test_name").withLastname("test_lastname").withGroup("xxx"), true);
       app.goTo().homePage();
     }
   }
@@ -36,3 +36,8 @@ public class ContactDeletionTests extends TestBase {
 }
 
  //ContactData("test_name", "test_middlename", "test_lastname", "111", "222", "333", "666-55-77", "test@gmail.com", "xxx")
+
+//new ContactData("test_name", null, "test_lastname", null, null, null, null, null, "xxx")
+
+//new ContactData().withFirstname("test_name").withMiddlename("test_middlename").withLastname("test_lastname")
+//            .withTitle("111").withCompany("222").withAddress("333").withHomephone("666-55-77").withEmail("test@gmail.com").withGroup("xxx");

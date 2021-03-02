@@ -16,7 +16,7 @@ public class ContactModificationTests extends TestBase {
     if (app.contact().list().size() == 0)
     {
       app.contact().initContactCreation();
-      app.contact().create(new ContactData("test_name", null, "test_lastname", null, null, null, null, null, "xxx"), true);
+      app.contact().create(new ContactData().withFirstname("test_name").withLastname("test_lastname").withGroup("xxx"), true);
       app.goTo().homePage();
     }
   }
@@ -25,7 +25,8 @@ public class ContactModificationTests extends TestBase {
   public void testModifyContactSorted() {
     List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
-    ContactData contact = new ContactData(before.get(index).getId(), "test_name", null, "test_lastname", null, null, null, null, null, "xxx");
+    ContactData contact = new ContactData()
+            .withId(before.get(index).getId()).withFirstname("test_name").withLastname("test_lastname").withGroup("xxx");
     app.contact().modify(index, contact);
     app.goTo().homePage();
     List<ContactData> after = app.contact().list();
@@ -46,7 +47,7 @@ public class ContactModificationTests extends TestBase {
     if (! app.contact().isThereAContact())
     {
       app.contact().initContactCreation();
-      app.contact().create(new ContactData("test_name", null, "test_lastname", null, null, null, null, null, "xxx"), true);
+      app.contact().create(new ContactData().withFirstname("test_name").withLastname("test_lastname").withGroup("xxx"), true);
       app.goTo().homePage();
     }
   }
@@ -55,8 +56,8 @@ public class ContactModificationTests extends TestBase {
   public void testModifyContact() {
     List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
-    ContactData contact = new ContactData(before.get(index).getId(), "test_name", null, "test_lastname", null, null, null, null, null, "xxx");
-    app.contact().modify(index, contact);
+    ContactData contact = new ContactData()
+            .withId(before.get(index).getId()).withFirstname("test_name").withLastname("test_lastname").withGroup("xxx");    app.contact().modify(index, contact);
     app.goTo().homePage();
     List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size());

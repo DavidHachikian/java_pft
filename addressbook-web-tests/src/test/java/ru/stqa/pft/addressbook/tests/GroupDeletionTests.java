@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 
 public class GroupDeletionTests extends TestBase {
-
+  @Ignore
   @Before
   public void ensurePreconditions() {
     app.goTo().groupPage();
@@ -19,7 +20,7 @@ public class GroupDeletionTests extends TestBase {
     }
   }
 
-
+  @Ignore
   @Test
   public void groupDeletionTests() {
     List<GroupData> before = app.group().list();
