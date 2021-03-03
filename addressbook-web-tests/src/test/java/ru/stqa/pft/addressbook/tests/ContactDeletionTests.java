@@ -1,17 +1,23 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.junit.Assert;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactDeletionTests extends TestBase {
 
   @Before
   public void ensurePreconditionsSorted() {
-    if (app.contact().list().size() == 0)
+    if (app.contact().all().size() == 0)
     {
       app.contact().initContactCreation();
       app.contact().create(new ContactData().withFirstname("test_name").withLastname("test_lastname").withGroup("xxx"), true);
@@ -19,7 +25,19 @@ public class ContactDeletionTests extends TestBase {
     }
   }
 
+  @Test
+  public void testContactDeletion() {
+    Contacts before = app.contact().all();
+    ContactData deletedContact = before.iterator().next();
+    app.contact().delete(deletedContact);
+    Contacts after = app.contact().all();
+    assertEquals(after.size(), before.size() - 1);
+    assertThat(after, CoreMatchers.equalTo(before.without(deletedContact)));
+  }
 
+
+
+/*
   @Test
   public void testContactDeletion() {
     List<ContactData> before = app.contact().list();
@@ -31,7 +49,7 @@ public class ContactDeletionTests extends TestBase {
     before.remove(index);
     Assert.assertEquals(before, after);
   }
-
+*/
 
 }
 

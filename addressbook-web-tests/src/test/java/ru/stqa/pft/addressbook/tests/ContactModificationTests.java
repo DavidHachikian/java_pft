@@ -1,26 +1,45 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
+
 public class ContactModificationTests extends TestBase {
 
   @Before
   public void ensurePreconditionsSorted() {
-    if (app.contact().list().size() == 0)
-    {
+    if (app.contact().all().size() == 0) {
       app.contact().initContactCreation();
       app.contact().create(new ContactData().withFirstname("test_name").withLastname("test_lastname").withGroup("xxx"), true);
       app.goTo().homePage();
     }
   }
 
+  @Test
+  public void testModifyContact() {
+    Contacts before = app.contact().all();
+    ContactData modifiedContact = before.iterator().next();
+    ContactData contact = new ContactData().withId(modifiedContact.getId()).
+            withFirstname("test_name").withLastname("test_lastname").withGroup("xxx");
+    app.contact().modifyById(contact);
+    app.goTo().homePage();
+    Contacts after = app.contact().all();
+    assertEquals(after.size(), before.size());
+    assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+  }
+/*
   @Test
   public void testModifyContactSorted() {
     List<ContactData> before = app.contact().list();
@@ -68,5 +87,7 @@ public class ContactModificationTests extends TestBase {
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
 
-
+*/
 }
+
+//new ContactData().withId(before.get(index).getId()).withFirstname("test_name").withLastname("test_lastname").withGroup("xxx");
