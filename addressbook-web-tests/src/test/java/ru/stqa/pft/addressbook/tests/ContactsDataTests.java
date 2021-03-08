@@ -17,11 +17,11 @@ public class ContactsDataTests extends TestBase {
     if (app.contact().all().size() == 0) {
       app.contact().initContactCreation();
       app.contact().create(new ContactData().
-              withFirstname("Masha").
-              withLastname("Petrova").
-              withEmail("1@gmail.com").
-              withEmail2("2@yahoo.com").
-              withEmail3("3@mail.com").
+              withFirstname("David").
+              withLastname("David2").
+              withEmail("222@gmail.com").
+              withEmail2("333@yandex.ru").
+              withEmail3("555@mail.com").
               withGroup("[none]"), true);
       app.goTo().homePage();
     }
