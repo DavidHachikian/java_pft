@@ -16,6 +16,7 @@ dependencies {
     implementation 'com.solidfire.code.gson:gson:2.6.2'
     implementation 'ch.qos.logback:logback-classic:1.1.5'
     implementation 'mysql:mysql-connector-java:8.0.23'
+    implementation 'org.hibernate:hibernate-core:5.4.22.Final'
 }
 
 task testGroups(type: Test) {
