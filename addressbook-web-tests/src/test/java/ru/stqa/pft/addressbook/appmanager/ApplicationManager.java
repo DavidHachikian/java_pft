@@ -26,6 +26,7 @@ public class ApplicationManager {
   public NavigationHelper navigationHelper;
   public GroupHelper groupHelper;
   private String browser;
+  private DbHelper dbHelper;
 
   //JavascriptExecutor js;
   //private Map<String, Object> vars;
@@ -39,6 +40,8 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
+    dbHelper = new DbHelper();
 
     if (browser.equals(BrowserType.FIREFOX)) {
       wd = new FirefoxDriver();
@@ -75,5 +78,9 @@ public class ApplicationManager {
   }
 
   public ContactHelper contact() { return contactHelper; }
+
+  public DbHelper db() {
+    return dbHelper;
+  }
 }
 
