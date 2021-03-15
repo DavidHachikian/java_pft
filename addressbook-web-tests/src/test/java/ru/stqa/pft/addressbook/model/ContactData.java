@@ -85,7 +85,7 @@ public class ContactData {
   @Column(name = "email3")
   @Type(type = "text")
   private String email3;
-
+/* Закомментирвал при выполнении задания 15
   @Expose
   @Column(name = "photo")
   @Type(type = "text")
@@ -99,7 +99,7 @@ public class ContactData {
     this.photo = photo.getPath();
     return  this;
   }
-
+*/
   public int getId() { return id; }
 
   public ContactData withFirstname(String firstname) {

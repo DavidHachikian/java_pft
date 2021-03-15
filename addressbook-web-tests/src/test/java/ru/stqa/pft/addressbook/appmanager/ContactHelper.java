@@ -62,7 +62,7 @@ public class ContactHelper extends HelperBase {
 
     type(By.name("lastname"), contactData.getLastname());
 
-    attach(By.name("photo"), contactData.getPhoto());
+    //attach(By.name("photo"), contactData.getPhoto()); Закомментирвал при выполнении задания 15
 
 
 

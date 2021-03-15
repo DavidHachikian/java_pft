@@ -3,8 +3,9 @@ package ru.stqa.pft.addressbook.tests;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Before;
-import org.junit.Test;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
@@ -15,10 +16,9 @@ import static org.testng.Assert.assertEquals;
 
 public class ContactDeletionTests extends TestBase {
 
-  @Before
+  @BeforeMethod
   public void ensurePreconditionsSorted() {
-    if (app.contact().all().size() == 0)
-    {
+    if (app.db().contacts().size() == 0) {
       app.contact().initContactCreation();
       app.contact().create(new ContactData().withFirstname("test_name").withLastname("test_lastname").withGroup("xxx"), true);
       app.goTo().homePage();
@@ -27,10 +27,10 @@ public class ContactDeletionTests extends TestBase {
 
   @Test
   public void testContactDeletion() {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     ContactData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertEquals(after.size(), before.size() - 1);
     assertThat(after, CoreMatchers.equalTo(before.without(deletedContact)));
   }
