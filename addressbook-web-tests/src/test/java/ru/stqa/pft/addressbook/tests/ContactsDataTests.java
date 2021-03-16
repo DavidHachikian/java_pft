@@ -21,8 +21,8 @@ public class ContactsDataTests extends TestBase {
               withLastname("David2").
               withEmail("222@gmail.com").
               withEmail2("333@yandex.ru").
-              withEmail3("555@mail.com").
-              withGroup("[none]"), true);
+              withEmail3("555@mail.com")/*.
+              withGroup("[none]")*/, true);
       app.goTo().homePage();
     }
   }

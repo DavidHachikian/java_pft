@@ -20,7 +20,7 @@ public class ContactDeletionTests extends TestBase {
   public void ensurePreconditionsSorted() {
     if (app.db().contacts().size() == 0) {
       app.contact().initContactCreation();
-      app.contact().create(new ContactData().withFirstname("test_name").withLastname("test_lastname").withGroup("xxx"), true);
+      app.contact().create(new ContactData().withFirstname("test_name").withLastname("test_lastname")/*.withGroup("xxx")*/, true);
       app.goTo().homePage();
     }
   }

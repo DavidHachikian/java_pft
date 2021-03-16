@@ -15,7 +15,7 @@ public class ContactModificationTests extends TestBase {
   public void ensurePreconditionsSorted() {
     if (app.db().contacts().size() == 0) {
       app.contact().initContactCreation();
-      app.contact().create(new ContactData().withFirstname("test_name").withLastname("test_lastname").withGroup("xxx"), true);
+      app.contact().create(new ContactData().withFirstname("test_name").withLastname("test_lastname")/*.withGroup("xxx")*/, true);
       app.goTo().homePage();
     }
   }
@@ -25,7 +25,7 @@ public class ContactModificationTests extends TestBase {
     Contacts before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withId(modifiedContact.getId()).
-            withFirstname("test_name").withLastname("test_lastname").withGroup("xxx");
+            withFirstname("test_name").withLastname("test_lastname")/*.withGroup("xxx")*/;
     app.contact().modifyById(contact);
     app.goTo().homePage();
     Contacts after = app.db().contacts();
