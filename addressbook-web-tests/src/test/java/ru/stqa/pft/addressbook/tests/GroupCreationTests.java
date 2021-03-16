@@ -62,9 +62,10 @@ public class GroupCreationTests extends TestBase {
     Groups after = app.db().groups();
     assertThat(after, equalTo(before.withAdded(
             group. withId(after.stream().mapToInt((g)-> g.getId()).max().getAsInt()))));
+    verifyGroupListInUI();
   }
 
-  @Test
+  @Test(enabled = false)
   public void testGroupCreationBad() {
     app.goTo().groupPage();
     Groups before = app.group().all();
