@@ -52,6 +52,10 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector(String.format("a[href ='edit.php?id=%s']", id))).click();
   }
 
+  public void selectContactNotInGroup(ContactData contact) {
+    wd.findElement(By.xpath(String.format("//input[@type='checkbox']", contact.getId()))).click();
+  }
+
   public void submitContactCreation() {
     click(By.name("submit"));
   }
@@ -165,6 +169,25 @@ public class ContactHelper extends HelperBase {
 
   }
 
+  public void selectGroup(GroupData group) {
+    wd.findElement(By.xpath(String.format("//select[@name='to_group']/option[@value='%s']", group.getId()))).click();
+  }
+
+  public void pushButtonAddToGroup() {
+    wd.findElement(By.xpath("//input[@name='add']")).click();
+  }
+
+  public void getGroupData(GroupData groupData) {
+    WebElement element = wd.findElement(By.xpath(String.format("//select[@name='group']/option[text() = '%s']", groupData.getName())));
+    element.click();
+  }
+
+  public void pushButtonRemoveFromGroup() {
+    wd.findElement(By.xpath("//input[@name='remove']")).click();
+  }
+
+
+/*
   public void selectDisplayGroup(String name) {
     new Select(wd.findElement(By.name("group"))).selectByVisibleText(name);
   }
@@ -183,5 +206,7 @@ public class ContactHelper extends HelperBase {
 
   private void removeFromGroup(String name) {
     click(By.name("remove"));
-  }
+  }*/
+
+
 }

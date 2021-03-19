@@ -1,5 +1,4 @@
 package ru.stqa.pft.addressbook.tests;
-
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
@@ -13,6 +12,7 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertTrue;
 
 public class AddContactToGroup extends TestBase {
 
@@ -34,7 +34,24 @@ public class AddContactToGroup extends TestBase {
 
   @Test
   public void testAddContactToGroup() {
-    Contacts beforeContacts = app.db().contacts();
+    app.goTo().homePage();
+    ContactData contactData = app.db().contactNotInGroup();
+    app.contact().selectContactNotInGroup(contactData);
+    Groups groups = app.db().groups();
+    GroupData group = groups.iterator().next();
+    app.contact().selectGroup(group);
+    app.contact().pushButtonAddToGroup();
+    ContactData contactData1 = app.db().contactById(contactData.getId());
+    assertTrue(contactData1.getGroups().contains(group));
+  }
+}
+
+
+
+
+
+
+    /*Contacts beforeContacts = app.db().contacts();
     ContactData contactAdded = beforeContacts.iterator().next();
     Groups beforeGroups = app.db().groups();
     GroupData modifiedGroup = beforeGroups.iterator().next();
@@ -50,6 +67,4 @@ public class AddContactToGroup extends TestBase {
     app.contact().addContactToGroup(contactAdded, modifiedGroup);
     app.goTo().homePage();
     assertThat(contactAdded.getGroups().withAdded(modifiedGroup), equalTo(app.db().contacts().stream()
-            .filter((c) -> c.getId() == contactAdded.getId()).collect(Collectors.toList()).get(0).getGroups()));
-  }
-}
+            .filter((c) -> c.getId() == contactAdded.getId()).collect(Collectors.toList()).get(0).getGroups()));*/

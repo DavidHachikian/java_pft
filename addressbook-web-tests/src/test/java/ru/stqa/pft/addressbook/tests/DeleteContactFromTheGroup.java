@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class DeleteContactFromTheGroup extends TestBase {
 
@@ -30,7 +32,21 @@ public class DeleteContactFromTheGroup extends TestBase {
 
   @Test
   public void testDeleteContactFromTheGroup() {
-    Contacts beforeContacts = app.db().contacts();
+    app.goTo().homePage();
+    ContactData contactData = app.db().contactInGroup();
+    GroupData groupData = contactData.getGroups().iterator().next();
+    app.contact().getGroupData(groupData);
+    app.contact().selectContactNotInGroup(contactData);
+    app.contact().pushButtonRemoveFromGroup();
+    app.goTo().homePage();
+    ContactData contactData1 = app.db().contactById(contactData.getId());
+    assertTrue(contactData1.getGroups().contains(groupData));
+  }
+}
+
+
+
+    /*Contacts beforeContacts = app.db().contacts();
     ContactData contactAdded = beforeContacts.iterator().next();
     Groups beforeGroups = app.db().groups();
     GroupData modifiedGroup = beforeGroups.iterator().next();
@@ -48,7 +64,4 @@ public class DeleteContactFromTheGroup extends TestBase {
     app.goTo().homePage();
     app.contact().selectDisplayGroup("[all]");
     assertThat(contactAdded.getGroups().without(modifiedGroup), equalTo(app.db().contacts().stream().
-            filter((c) -> c.getId() == contactAdded.getId()).collect(Collectors.toList()).get(0).getGroups()));
-  }
-}
-
+            filter((c) -> c.getId() == contactAdded.getId()).collect(Collectors.toList()).get(0).getGroups()));*/
