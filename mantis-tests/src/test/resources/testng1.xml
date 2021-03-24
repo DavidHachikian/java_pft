@@ -6,8 +6,6 @@
   <test name="Login" >
     <classes>
        <class name="ru.stqa.pft.mantis.tests.LoginTests"/>
-    </classes>
-    <classes>
        <class name="ru.stqa.pft.mantis.tests.RegistrationTests"/>
     </classes>
   </test>
