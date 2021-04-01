@@ -2,13 +2,18 @@ package ru.stqa.pft.mantis.model;
 
 public class Issue {
 
-  int id;
+  private  int id;
   private String summary;
-  private String description;
-  private Project project;
-  private String status;
-  private String resolution;
+  private String state;
 
+  public String getState() {
+    return state;
+  }
+
+  public Issue withState(String state) {
+    this.state = state;
+    return this;
+  }
 
   public int getId() {
     return id;
@@ -46,32 +51,6 @@ public class Issue {
     return this;
   }
 
-  public String getStatus() {
-    return status;
-  }
-
-  public Issue withStatus(String status) {
-    this.status = status;
-    return this;
-  }
-
-  public String getResolution() {
-    return resolution;
-  }
-
-  public Issue withResolution(String resolution) {
-    this.resolution = resolution;
-    return this;
-  }
-
-  @Override
-  public String toString() {
-    return "Issue{" +
-            "id=" + id +
-            ", summary='" + summary + '\'' +
-            ", status='" + status + '\'' +
-            ", resolution='" + resolution + '\'' +
-            ", description='" + description + '\'' +
-            '}';
-  }
+  private String description;
+  private Project project;
 }
