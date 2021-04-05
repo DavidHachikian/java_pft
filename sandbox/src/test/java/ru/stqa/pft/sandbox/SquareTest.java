@@ -1,6 +1,6 @@
 package ru.stqa.pft.sandbox;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.testng.Assert;
 import ru.Square;
 

@@ -1,8 +1,8 @@
 package ru.stqa.pft.sandbox;
 
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Ignore;
+import org.testng.annotations.Test;
 
 public class PrimeTests {
 

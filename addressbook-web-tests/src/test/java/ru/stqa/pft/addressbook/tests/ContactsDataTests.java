@@ -1,7 +1,8 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.junit.Before;
-import org.junit.Test;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactsDataTests extends TestBase {
 
-  @Before
+  @BeforeMethod
   public void ensurePreconditions() {
     if (app.contact().all().size() == 0) {
       app.contact().initContactCreation();
