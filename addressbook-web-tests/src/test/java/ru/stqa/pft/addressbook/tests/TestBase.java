@@ -32,12 +32,12 @@ public class TestBase {
           = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
   @BeforeSuite(alwaysRun = true)
-  public void setUp() throws IOException {
+  public void setUp() throws Exception {
     app.init();
   }
 
   @AfterSuite(alwaysRun = true)
-  public void tearDown() {
+  public void tearDown() throws Exception {
     app.stop();
   }
 
